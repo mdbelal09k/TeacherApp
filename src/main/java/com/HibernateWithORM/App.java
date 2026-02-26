@@ -24,11 +24,15 @@ public class App
         ///-> CREATE A NEW STUDENT
         
         Student student =new Student((long) 1, "sam altman","samaltman@gmail.com");
-        ///-> save student
+        ///->s save student
         
         Session session =HibernateUtil.getSessionFactory().openSession();
         Transaction transaction =(Transaction) session.beginTransaction();
-        session.persist(student);
+        if(transaction !=null) {
+        	session.persist(student);
+        }else {
+        	System.out.println("student not added!");
+        }
         transaction.commit();
         session.close();
         
